@@ -1,0 +1,21 @@
+#
+#Thu Oct 20 17:50:06 CEST 2016
+owner=
+code=GMLCatastro
+java-version=j1_7
+official=true
+type=Script
+version=1.0.0-4
+state=testing
+operating-system=all
+dependencies=
+sources-url=
+web-url=
+architecture=all
+model-version=1.0.1
+categories=
+description=
+owner-url=
+buildNumber=4
+gvSIG-version=2.3.0
+name=GMLCatastro
