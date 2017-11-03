@@ -24,10 +24,9 @@
     </at>
     <at name="componentclass">com.jeta.forms.gui.form.FormComponent</at>
    </super>
-   <at name="id">/home/osc/gvsig-devel/gvsig/gvSIG-desktop-2.3.0-2447-final-lin_ubuntu_16.04-x86_64/home/gvSIG/plugins/org.gvsig.scripting.app.mainplugin/scripts/addons/GMLCatastro/gmlcat/gmlcat.xml</at>
-   <at name="path">addons/GMLCatastro/gmlcat/gmlcat.xml</at>
+   <at name="id">C:\Users\oskmo\gvSIG\plugins\org.gvsig.scripting.app.mainplugin\scripts\addons\GMLCatastro\gmlcat\gmlcat.xml</at>
    <at name="rowspecs">CENTER:DEFAULT:NONE,CENTER:DEFAULT:NONE,CENTER:DEFAULT:NONE,FILL:PREF:NONE,CENTER:DEFAULT:NONE,CENTER:DEFAULT:NONE,CENTER:DEFAULT:NONE,CENTER:DEFAULT:NONE,CENTER:DEFAULT:NONE,CENTER:DEFAULT:NONE,CENTER:16PX:NONE,CENTER:DEFAULT:NONE,CENTER:DEFAULT:NONE</at>
-   <at name="colspecs">FILL:DEFAULT:NONE,FILL:312PX:NONE,FILL:98PX:NONE,FILL:DEFAULT:NONE</at>
+   <at name="colspecs">FILL:DEFAULT:NONE,FILL:312PX:GROW(1.0),FILL:98PX:NONE,FILL:DEFAULT:NONE</at>
    <at name="components">
     <object classname="java.util.LinkedList">
      <item >
@@ -75,7 +74,7 @@
              </object>
             </at>
             <at name="name"></at>
-            <at name="width">308</at>
+            <at name="width">414</at>
             <at name="text">Importar DXF masivo o GML INSPIRE</at>
             <at name="fill">
              <object classname="com.jeta.forms.store.properties.effects.PaintProperty">
@@ -246,10 +245,10 @@
               </at>
              </object>
             </at>
-            <at name="width">406</at>
+            <at name="width">512</at>
             <at name="name"/>
             <at name="text">Herramientas para GML Catastro</at>
-            <at name="height">19</at>
+            <at name="height">20</at>
            </object>
           </at>
          </object>
@@ -301,7 +300,7 @@
               </at>
              </object>
             </at>
-            <at name="width">406</at>
+            <at name="width">512</at>
             <at name="name"/>
             <at name="height">12</at>
            </object>
@@ -355,7 +354,7 @@
               </at>
              </object>
             </at>
-            <at name="width">308</at>
+            <at name="width">414</at>
             <at name="name"/>
             <at name="text">Abrir con formato GML Catastral</at>
             <at name="fill">
@@ -471,7 +470,7 @@
               </at>
              </object>
             </at>
-            <at name="width">308</at>
+            <at name="width">414</at>
             <at name="name"/>
             <at name="text">Extraer entidades seleccionadas</at>
             <at name="fill">
@@ -587,7 +586,7 @@
               </at>
              </object>
             </at>
-            <at name="width">308</at>
+            <at name="width">414</at>
             <at name="name"/>
             <at name="text">Manual de Ayuda en línea</at>
             <at name="fill">
@@ -676,7 +675,7 @@
          </at>
         </object>
        </at>
-       <at name="name"></at>
+       <at name="name"/>
        <at name="fill">
         <object classname="com.jeta.forms.store.properties.effects.PaintProperty">
          <at name="name">fill</at>

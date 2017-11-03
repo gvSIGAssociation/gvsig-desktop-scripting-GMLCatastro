@@ -1,18 +1,15 @@
 # encoding: utf-8
 
-import gvsig
-
 import dxf2gml
 reload(dxf2gml)
 
 import extraerentidades
 reload(extraerentidades)
 
-from gvsig import *
 from gvsig.libs.formpanel import FormPanel
 import os
 
-from gvsig import commonsdialog
+from gvsig import commonsdialog, currentView, getResource, openStore, currentLayer
 from org.gvsig.scripting.app.extension import ScriptingExtension
 from org.gvsig.fmap.mapcontext import MapContextLocator
 
@@ -43,12 +40,12 @@ class GMLCatExtension(ScriptingExtension):
       
     def execute(self,actionCommand, *args):
         l = GMLCat()
-        l.showTool("GMLCat")
+        l.showTool("GMLCatastro")
     
 class GMLCat(FormPanel):
         def __init__(self):
             FormPanel.__init__(self, os.path.join(os.path.dirname(__file__), "gmlcat.xml"))
-            #self.setPreferredSize(500,100)
+            self.setPreferredSize(450,200)
             
         def btnDXFImport_click(self, *args):
             fc = commonsdialog.filechooser("OPEN_FILE", title="", initialPath=None,  multiselection=False, filter = None, fileHidingEnabled=True, root=None)
@@ -63,7 +60,7 @@ class GMLCat(FormPanel):
             if file_extension == ".dxf":
                 dxf2gml.dxf2gml(dxffile=fc)
             elif file_extension == ".gml" or file_extension == ".GML":
-                layer = openGML(gmlfile=fc, p_crs=gvsig.currentView().getProjectionCode())
+                layer = openGML(gmlfile=fc, p_crs=currentView().getProjectionCode())
                 extraerentidades.extraerentidades(layer=layer)
             else:
                 commonsdialog.msgbox("Fichero con extension no correspondiente a: gml o dxf")
@@ -73,24 +70,26 @@ class GMLCat(FormPanel):
 
             if fc == None or not os.path.exists(fc):
                 return
-            openGML(gmlfile=fc, p_crs=gvsig.currentView().getProjectionCode())
-
+            layer = openGML(gmlfile=fc, p_crs=currentView().getProjectionCode())
+            currentView().addLayer(layer)
+            env = layer.getFullEnvelope()
+            currentView().centerView(env)
+            
         def btnExtraer_click(self, *args):
-            extraerentidades.extraerentidades(layer=gvsig.currentLayer())
-            pass
+            extraerentidades.extraerentidades(layer=currentLayer())
 
         def btnHelp_click(self, *args):
             pdfpath = getResource(__file__, "gmlcatastro_0_1.pdf")
             visorPDF(pdfpath)
-            pass
             
 def openGML(gmlfile, p_crs):
-    if os.path.exists(os.path.splitext(gmlfile)[0]+'.gfs'):
-        gfs = os.path.splitext(gmlfile)[0]+'.gfs'
-        print "--usar gfs"
-    else:
-        gfs = gvsig.getResource(__file__,"data","inspire_cp_CadastralParcel.gfs")
-    gmlstore = gvsig.openStore('GMLDataStoreProvider',xsdSchema=None,
+    #if os.path.exists(os.path.splitext(gmlfile)[0]+'.gfs'):
+    #    gfs = os.path.splitext(gmlfile)[0]+'.gfs'
+    #    print "--usar gfs"
+    #else:
+    gfs = getResource(__file__,"data","catastro.gfs")
+        
+    gmlstore = openStore('GMLDataStoreProvider',xsdSchema=None,
                                      gfsSchema=gfs,
                                      file=gmlfile,
                                      CRS=p_crs,
@@ -100,12 +99,10 @@ def openGML(gmlfile, p_crs):
                                      ignoreSpatialFilter=True,
                                      ProviderName="GMLDataStoreProvider")
     layer = MapContextLocator.getMapContextManager().createLayer("CadastralParcel", gmlstore.getStore())
-    currentView().addLayer(layer)
-    env = layer.getFullEnvelope()
-    currentView().centerView(env)
     return layer
+
 
 def main(*args):
     l = GMLCat()
     l.showTool("GMLCatastro")
-    pass
+    

@@ -128,10 +128,8 @@ class ExporttoGMLService(AbstractMonitorableTask, ExporttoService):
         for feature in selection: #.features():
             n+=1
             self.taskStatus.setCurValue(n)
-            print "GML SOBRE: ", feature.geometry(), type(feature.geometry())
             if self.taskStatus.isCancellationRequested():
                 return
-                    
             try:
                 p_label = feature.get("localId")
                 te = feature.get("nameSpace")
@@ -152,7 +150,6 @@ class ExporttoGMLService(AbstractMonitorableTask, ExporttoService):
                            p_unico = p_unico,
                            n = n
                           )
-    
             
             if p_cargar == True:
                 os = openStore('GMLDataStoreProvider',xsdSchema=None,
@@ -171,7 +168,6 @@ class ExporttoGMLService(AbstractMonitorableTask, ExporttoService):
                     
                 layer = MapContextLocator.getMapContextManager().createLayer(layername, os.getStore())
                 currentView().addLayer(layer)
-
         print "ExportotoGMLService:gml-done"
         
         return True

@@ -48,4 +48,4 @@ def selfRegister():
 def main(*args):
     selfRegister()
     addons.GMLCatastro.exporttogml.exporttogml.ExporttoGMLProviderLibrary()
-    addons.GMLCatastro.exporttogml4.exporttogml.ExporttoGML4ProviderLibrary()
+    #addons.GMLCatastro.exporttogml4.exporttogml.ExporttoGML4ProviderLibrary()
