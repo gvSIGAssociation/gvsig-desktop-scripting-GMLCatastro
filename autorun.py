@@ -17,7 +17,7 @@ from java.io import File
 from org.gvsig.app import ApplicationLocator
 import os
 
-from gmlcat.gmlcat import GMLCatExtension
+from addons.GMLCatastro.gmlcat.gmlcat import GMLCatExtension
     
 def selfRegister():
 
