@@ -8,10 +8,10 @@ from org.gvsig.andami import Utilities
 import os
 
 def reProjectBetweenCRS(point, crs_in, crs_out):
-    print "projection.. ", crs_in, crs_out
+
     v1 = getCRS(crs_in)
     v2 = getCRS(crs_out)
-    print v1, v2
+
     ICoordTrans1 = v1.getCT(v2)
     point.reProject(ICoordTrans1)
     return point
@@ -19,8 +19,7 @@ def reProjectBetweenCRS(point, crs_in, crs_out):
     
 def gvsig2gmlcadastral(feature, pathresultados='', p_label="Parcela", p_crs="EPSG:25830", p_unico=True, n=1):
     """ Convierte una entidad en un gml """
-    print "====== CONVERSOR A GML "
-        
+
     sch = createSchema()
     sch.append("GEOMETRY", "GEOMETRY")
     sch.get("GEOMETRY").setGeometryType(geom.POLYGON, geom.D2)
@@ -49,7 +48,7 @@ def gvsig2gmlcadastral(feature, pathresultados='', p_label="Parcela", p_crs="EPS
         tempgml = os.path.join(pathresultados, p_label+".gml")
 
     ############################## PREPARACION DEL GML ##############################
-    print "# Path new gml: ", tempgml
+
     with open(tempgml, 'w') as filegml:
         ##### PREPARAR GEOMETRIA
         polygon = feature.geometry()
@@ -58,7 +57,7 @@ def gvsig2gmlcadastral(feature, pathresultados='', p_label="Parcela", p_crs="EPS
         crs_view = currentLayer().getProjectionCode()#.split(":")[1]
         crs_gml = p_crs.split(":")[1]
         if crs_view != crs_gml:
-            print "Reprojectar: ", crs_view, " a ", p_crs
+
             polygon = reProjectBetweenCRS(polygon, crs_view, p_crs)
 
         p_area = polygon.area() # Area total del multipoligono

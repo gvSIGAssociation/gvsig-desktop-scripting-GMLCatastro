@@ -15,7 +15,6 @@ def dxf2gml(dxffile=None):
         dxffile = gvsig.getResource(__file__, "datos", "ConsultaMasiva_EPSG_25830.dxf")
 
     crs_view_code = gvsig.currentView().getProjectionCode()
-    print crs_view_code
     crs = commonsdialog.inputbox("Introduce CRS del DXF (si se deja en blanco se asigna crs de la vista: {0})".format(str(crs_view_code)), "Importar fichero DXF", 1, str(crs_view_code))
 
     if crs == None:

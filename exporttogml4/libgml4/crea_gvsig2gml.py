@@ -7,7 +7,6 @@ from gvsig import *
 from org.gvsig.andami import Utilities
 
 def reProjectBetweenCRS(point, crs_in, crs_out):
-    print "projection.. ", crs_in, crs_out
     v1 = getCRS(crs_in)
     v2 = getCRS(crs_out)
     print v1, v2
@@ -17,29 +16,23 @@ def reProjectBetweenCRS(point, crs_in, crs_out):
     
 def crea_gvsig2gml(featureStore, pathresultados='', p_label="Parcela", p_crs="EPSG:25830", p_unico=True):
     """ Convierte una entidad en un gml """
-    print "====== CONVERSOR A GML "
-        
     sch = createSchema()
     sch.append("GEOMETRY", "GEOMETRY")
     sch.get("GEOMETRY").setGeometryType(geom.POLYGON, geom.D2)
 
-
-
     #for f in featureStore.features():
     selection = currentLayer().getSelection()
-    print "selection count: ", selection.getCount()
+
     if selection.getCount() == 0 or selection.getCount() > 1:
         commonsdialog.msgbox("None feature selected or more than one feature", "Error", 1)
         return
         
     for f in selection:
-        print  "featureStore:feature"
         feature = f #.getCopy()
         
     #p_label = str(commonsdialog.inputbox("Parcela", "Nombre de la parcela"))
     if p_label=="":
         schvalues = currentLayer().getSchema().getAttrNames()
-        print schvalues
         if "RefCat" in schvalues:
             p_label = feature.RefCat
         elif "nationalCadastralReference" in schvalues:
@@ -62,9 +55,7 @@ def crea_gvsig2gml(featureStore, pathresultados='', p_label="Parcela", p_crs="EP
         tempgml = getTempFile(p_label,".gml", pathresultados)
     elif p_unico==False:
         tempgml = os.path.join(pathresultados, p_label+".gml")
-    print tempgml
         
-    print "==== PARCELA"
     with open(tempgml, 'w') as filegml:
         #filegml.writelines(PLANTILLA_1)
         
@@ -82,14 +73,13 @@ def crea_gvsig2gml(featureStore, pathresultados='', p_label="Parcela", p_crs="EP
         crs_view = currentLayer().getProjectionCode()#.split(":")[1]
         crs_gml = p_crs
         if crs_view != crs_gml:
-            print "Reprojectar: ", crs_view, " a ", crs_gml
             polygon = reProjectBetweenCRS(polygon, crs_view, crs_gml)
 
 
         p_polygons += plantilla_interior("exterior", listarCoordenadas(polygon), polygon.getNumVertices())
         
         p_area = polygon.area()
-        print('El area del poligono es %.4f m2.' % (p_area))
+
         ### Crear coordenadas del los anillos
         numrings = polygon.getNumInteriorRings()
         if numrings >= 1:
@@ -106,7 +96,7 @@ def crea_gvsig2gml(featureStore, pathresultados='', p_label="Parcela", p_crs="EP
 def listarCoordenadas(geometria):
     """ Devuelve string con el listado de coordenadas """
     vertices = geometria.getNumVertices()
-    print('Total de vertices del poligono: %s' % (vertices))
+
     p_coord = ""
     for i in range(0, vertices):
         pt = geometria.getVertex(i)

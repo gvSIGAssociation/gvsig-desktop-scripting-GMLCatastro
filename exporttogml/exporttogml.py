@@ -61,9 +61,8 @@ class ExportName(FormPanel, ExporttoSwingProviderPanel):
         return "Panel"
         
     def enterPanel(self):
-        print "Panel print"
+        pass
         
-              
     def isValidPanel(self):
         #from org.gvsig.exportto.swing.spi import ExporttoPanelValidationException
         #if not os.path.exists(self.txtPath.getText()) or not '':
@@ -75,29 +74,25 @@ class ExportName(FormPanel, ExporttoSwingProviderPanel):
         
 class ExporttoGMLService(AbstractMonitorableTask, ExporttoService):
     def __init__(self, fpanel, featureStore, projection):
-          #logger = LoggerFactory.getLogger(ExporttoGMLService)
-          self.MAX_FIELD_NAME_LENGTH = 10
-          self.fpanel = fpanel
-          self.featureStore = featureStore
-          self.projection = projection
-          print "\nExporttoGMLService:init.fpanel",fpanel, type(fpanel)
-          #r: DefaultExporttoSwingProviderServices
-          #taskStatus = super(AbstractMonitorableTask, self)
-          self.taskStatus.setTitle("Exporting surfaces")
-          #Range en funcion de el numero de entidades en el featureStore
-          #self.taskStatus.setRangeOfValues(0, 100)
-          #self.taskStatus.setCurValue(0)
-          self.exporttoServiceFinishAction = ExporttoServiceFinishAction
+        #logger = LoggerFactory.getLogger(ExporttoGMLService)
+        self.MAX_FIELD_NAME_LENGTH = 10
+        self.fpanel = fpanel
+        self.featureStore = featureStore
+        self.projection = projection
+        #r: DefaultExporttoSwingProviderServices
+        #taskStatus = super(AbstractMonitorableTask, self)
+        self.taskStatus.setTitle("Exporting surfaces")
+        #Range en funcion de el numero de entidades en el featureStore
+        #self.taskStatus.setRangeOfValues(0, 100)
+        #self.taskStatus.setCurValue(0)
+        self.exporttoServiceFinishAction = ExporttoServiceFinishAction
         
     def export(self,*args):
-          print "\n*** ExporttoGMLService:export"
-          print "ExportotoGMLService:export.args ", args, type(args)
-          #print "*** fpanel", self.fpanel.selectFileOptionPanel.getSelectedFile()
-          #self.gml(self.fpanel, self.featureStore, self.projection)
-          self.gml(self.fpanel, args[0], self.projection)
+        #print "*** fpanel", self.fpanel.selectFileOptionPanel.getSelectedFile()
+        #self.gml(self.fpanel, self.featureStore, self.projection)
+        self.gml(self.fpanel, args[0], self.projection)
     
     def gml(self, fpanel, featureStore, projection):
-        print "FEATURESTORE: ", featureStore, type(featureStore)
         selection = featureStore
         #p_selection = fpanel.chbSelection.isSelected()
         #if p_selection == True:
@@ -168,8 +163,7 @@ class ExporttoGMLService(AbstractMonitorableTask, ExporttoService):
                     
                 layer = MapContextLocator.getMapContextManager().createLayer(layername, os.getStore())
                 currentView().addLayer(layer)
-        print "ExportotoGMLService:gml-done"
-        
+
         return True
         
     def setFinishAction(self, exporttoServiceFinishAction):
@@ -197,7 +191,6 @@ class ExporttoGMLProvider(AbstractExporttoFileProvider):
         return 1 #AbstractExporttoFileProvider.getPanelCount(self)+1
 
     def createExporttoService(self):
-        print "ExporttoGMLProvider:createExporttoService"
         return ExporttoGMLService(self.exportname, self.featureStore, self.projection) #self.selectFileOptionPanel, self.featureStore, self.projection)
         
 class ExporttoGMLProviderFactory(AbstractExporttoFileProviderFactory):
@@ -206,11 +199,6 @@ class ExporttoGMLProviderFactory(AbstractExporttoFileProviderFactory):
         self.PROVIDER_NAME = "GML Catastro"
         
     def create(self, parameters, services): #, parameters, services):
-        print "ExporttoGMLProviderFactory-created"
-        print "ExporttoGMLProviderFactory.parameters:",parameters
-        print "ExporttoGMLProviderFactory.services:", services
-        print "ExporttoGMLProviderFactory.parameters-type", type(parameters)
-
         featureStore = parameters.getDynValue("FeatureStore")
         projection = parameters.getDynValue("Projection")
         return ExporttoGMLProvider(services, featureStore, projection)

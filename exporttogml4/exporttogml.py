@@ -73,17 +73,13 @@ class ExporttoGML4Service(AbstractMonitorableTask, ExporttoService):
           self.fpanel = fpanel
           self.featureStore = featureStore
           self.projection = projection
-          print "\nExporttoGMLService:init.fpanel",fpanel, type(fpanel)
           self.taskStatus.setTitle("Exporting surfaces")
           self.exporttoServiceFinishAction = ExporttoServiceFinishAction
 
     def export(self,*args):
-          print "\n*** ExporttoGMLService:export"
-          print "ExportotoGMLService:export.args ", args, type(args)
           self.gml(self.fpanel, args[0], self.projection)
 
     def gml(self, fpanel, featureStore, projection):
-        print "FEATURESTORE: ", featureStore, type(featureStore)
         selection = featureStore
         dup = []
         for feature in selection:
@@ -108,7 +104,6 @@ class ExporttoGML4Service(AbstractMonitorableTask, ExporttoService):
         for feature in selection: #.features():
             n+=1
             self.taskStatus.setCurValue(n)
-            print "GML SOBRE: ", feature.geometry(), type(feature.geometry())
             if self.taskStatus.isCancellationRequested():
                 return
 
@@ -151,9 +146,6 @@ class ExporttoGML4Service(AbstractMonitorableTask, ExporttoService):
 
                 layer = MapContextLocator.getMapContextManager().createLayer(layername, os.getStore())
                 currentView().addLayer(layer)
-
-        print "ExportotoGMLService:gml-done"
-
         return True
 
     def setFinishAction(self, exporttoServiceFinishAction):
@@ -176,7 +168,6 @@ class ExporttoGML4Provider(AbstractExporttoFileProvider):
         return 1
 
     def createExporttoService(self):
-        print "ExporttoGMLProvider:createExporttoService"
         return ExporttoGML4Service(self.exportname, self.featureStore, self.projection)
 
 class ExporttoGML4ProviderFactory(AbstractExporttoFileProviderFactory):
@@ -185,11 +176,6 @@ class ExporttoGML4ProviderFactory(AbstractExporttoFileProviderFactory):
         self.PROVIDER_NAME = "GML Catastro v4"
 
     def create(self, parameters, services):
-        print "ExporttoGMLProviderFactory-created"
-        print "ExporttoGMLProviderFactory.parameters:",parameters
-        print "ExporttoGMLProviderFactory.services:", services
-        print "ExporttoGMLProviderFactory.parameters-type", type(parameters)
-
         featureStore = parameters.getDynValue("FeatureStore")
         projection = parameters.getDynValue("Projection")
         return ExporttoGML4Provider(services, featureStore, projection)
