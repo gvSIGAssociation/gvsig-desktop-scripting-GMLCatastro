@@ -1,5 +1,10 @@
 # encoding: utf-8
 
+import gvsig
+import os
+
+open(os.path.normpath(os.path.join(__file__,"..","..", "__init__.py")), "a").close()
+
 import addons.GMLCatastro.exporttogml
 reload(addons.GMLCatastro.exporttogml)
 
