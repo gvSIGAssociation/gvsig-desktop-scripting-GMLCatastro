@@ -17,6 +17,8 @@ from org.gvsig.tools import ToolsLocator
 from org.gvsig.tools.swing.api import ToolsSwingLocator
 from java.io import File
 
+from org.gvsig.andami import PluginsLocator
+
 def visorPDF(rutaAbsoluta):
     formatManagers = ToolsLocator.getExtensionPointManager().get("HyperLinkAction")
     pdfManager = formatManagers.get("PDF_format").create()
@@ -43,52 +45,56 @@ class GMLCatExtension(ScriptingExtension):
         l.showTool("GMLCatastro")
     
 class GMLCat(FormPanel):
-    def __init__(self):
-        FormPanel.__init__(self, os.path.join(os.path.dirname(__file__), "gmlcat.xml"))
-        self.setPreferredSize(450,200)
-        
-    def btnDXFImport_click(self, *args):
-        fc = commonsdialog.filechooser("OPEN_FILE", title="", initialPath=None,  multiselection=False, filter = None, fileHidingEnabled=True, root=None)
-        if fc == None:
-            return
-        if not os.path.exists(fc):
-            commonsdialog.msgbox("Ruta de fichero invalida")
-            return
-        
-        filename, file_extension = os.path.splitext(fc)
-        
-        if file_extension == ".dxf":
-            dxf2gml.dxf2gml(dxffile=fc)
-        elif file_extension == ".gml" or file_extension == ".GML":
+        def __init__(self):
+            FormPanel.__init__(self, os.path.join(os.path.dirname(__file__), "gmlcat.xml"))
+            self.setPreferredSize(450,200)
+            
+        def btnDXFImport_click(self, *args):
+            fc = commonsdialog.filechooser("OPEN_FILE", title="", initialPath=None,  multiselection=False, filter = None, fileHidingEnabled=True, root=None)
+            if fc == None:
+                return
+            if not os.path.exists(fc):
+                commonsdialog.msgbox("Ruta de fichero invalida")
+                return
+            
+            filename, file_extension = os.path.splitext(fc)
+            
+            if file_extension == ".dxf":
+                dxf2gml.dxf2gml(dxffile=fc)
+            elif file_extension == ".gml" or file_extension == ".GML":
+                layer = openGML(gmlfile=fc, p_crs=currentView().getProjectionCode())
+                extraerentidades.extraerentidades(layer=layer)
+            else:
+                commonsdialog.msgbox("Fichero con extension no correspondiente a: gml o dxf")
+
+        def btnOpenGML_click(self, *args):
+            fc = commonsdialog.filechooser("OPEN_FILE", title="", initialPath=None,  multiselection=False, filter = None, fileHidingEnabled=True, root=None)
+
+            if fc == None or not os.path.exists(fc):
+                return
             layer = openGML(gmlfile=fc, p_crs=currentView().getProjectionCode())
-            extraerentidades.extraerentidades(layer=layer)
-        else:
-            commonsdialog.msgbox("Fichero con extension no correspondiente a: gml o dxf")
-  
-    def btnOpenGML_click(self, *args):
-        fc = commonsdialog.filechooser("OPEN_FILE", title="", initialPath=None,  multiselection=False, filter = None, fileHidingEnabled=True, root=None)
-  
-        if fc == None or not os.path.exists(fc):
-            return
-        layer = openGML(gmlfile=fc, p_crs=currentView().getProjectionCode())
-        currentView().addLayer(layer)
-        env = layer.getFullEnvelope()
-        currentView().centerView(env)
-        
-    def btnExtraer_click(self, *args):
-        extraerentidades.extraerentidades(layer=currentLayer())
-  
-    def btnHelp_click(self, *args):
-        pdfpath = getResource(__file__, "gmlcatastro_0_1.pdf")
-        visorPDF(pdfpath)
-        
+            currentView().addLayer(layer)
+            env = layer.getFullEnvelope()
+            currentView().centerView(env)
+            
+        def btnExtraer_click(self, *args):
+            extraerentidades.extraerentidades(layer=currentLayer())
+
+        def btnHelp_click(self, *args):
+            pdfpath = getResource(__file__, "gmlcatastro_0_1.pdf")
+            visorPDF(pdfpath)
+            
 def openGML(gmlfile, p_crs):
     #if os.path.exists(os.path.splitext(gmlfile)[0]+'.gfs'):
     #    gfs = os.path.splitext(gmlfile)[0]+'.gfs'
     #    print "--usar gfs"
     #else:
-    gfs = getResource(__file__,"data","catastro.gfs")
-        
+
+    pluginsManager = PluginsLocator.getManager() 
+    plugin = pluginsManager.getPlugin("org.gvsig.gdal.app.ogr.gml") 
+    f = plugin.getPluginDirectory()
+    gfs = getResource(f.getAbsolutePath(), "schemas", "catastro.gfs")
+    
     gmlstore = openStore('GMLDataStoreProvider',xsdSchema=None,
                                      gfsSchema=gfs,
                                      file=gmlfile,
