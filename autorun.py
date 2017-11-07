@@ -3,8 +3,10 @@
 import addons.GMLCatastro.exporttogml
 reload(addons.GMLCatastro.exporttogml)
 
-import addons.GMLCatastro.exporttogml4
-reload(addons.GMLCatastro.exporttogml4)
+from addons.GMLCatastro import exporttogml
+
+#import addons.GMLCatastro.exporttogml4
+#reload(addons.GMLCatastro.exporttogml4)
 
 import addons.GMLCatastro.gmlcat
 reload(addons.GMLCatastro.gmlcat)
@@ -47,5 +49,6 @@ def selfRegister():
   
 def main(*args):
     selfRegister()
-    addons.GMLCatastro.exporttogml.exporttogml.ExporttoGMLProviderLibrary()
+    exporttogml.selfRegister()
     #addons.GMLCatastro.exporttogml4.exporttogml.ExporttoGML4ProviderLibrary()
+    pass

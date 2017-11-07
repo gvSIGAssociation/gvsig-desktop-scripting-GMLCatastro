@@ -220,11 +220,14 @@ class ExporttoGMLProviderLibrary(AbstractLibrary):
     def doPostInitialize(self):
         providerManager = ExporttoSwingProviderLocator.getManager()
         providerManager.addProviderFactory(ExporttoGMLProviderFactory())
-        
+
+def selfRegister(): 
+    providerManager = ExporttoSwingProviderLocator.getManager()
+    providerManager.addProviderFactory(ExporttoGMLProviderFactory())
+
 def main(*args):
     
     #x = ExporttoGMLCatastro()
-    ExporttoGMLProviderLibrary()
-    
+    selfRegister()
     return
 
