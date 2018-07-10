@@ -1,9 +1,6 @@
 # encoding: utf-8
 
 import gvsig
-import os
-
-open(os.path.normpath(os.path.join(__file__,"..","..", "__init__.py")), "a").close()
 
 import addons.GMLCatastro.exporttogml
 reload(addons.GMLCatastro.exporttogml)
@@ -30,7 +27,7 @@ def selfRegister():
 
   application = ApplicationLocator.getManager()
 
-  icon_show = File(os.path.join(os.path.dirname(__file__),"gml-cat.png")).toURI().toURL()
+  icon_show = File(gvsig.getResource(__file__,"gml-cat.png")).toURI().toURL()
 
   iconTheme = ToolsSwingLocator.getIconThemeManager().getCurrent()
   iconTheme.registerDefault("scripting.gml-cat", "action", "tools-gml-cat-show", None, icon_show)

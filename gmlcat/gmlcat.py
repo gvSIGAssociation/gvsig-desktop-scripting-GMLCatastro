@@ -18,6 +18,7 @@ from org.gvsig.tools.swing.api import ToolsSwingLocator
 from java.io import File
 
 from org.gvsig.andami import PluginsLocator
+from gvsig import getResource
 
 def visorPDF(rutaAbsoluta):
     formatManagers = ToolsLocator.getExtensionPointManager().get("HyperLinkAction")
@@ -46,7 +47,7 @@ class GMLCatExtension(ScriptingExtension):
     
 class GMLCat(FormPanel):
         def __init__(self):
-            FormPanel.__init__(self, os.path.join(os.path.dirname(__file__), "gmlcat.xml"))
+            FormPanel.__init__(self, getResource(__file__, "gmlcat.xml"))
             self.setPreferredSize(450,200)
             
         def btnDXFImport_click(self, *args):
