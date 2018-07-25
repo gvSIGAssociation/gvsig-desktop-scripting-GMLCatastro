@@ -1,11 +1,11 @@
 #
-#Tue Jul 10 07:58:03 CEST 2018
+#Tue Nov 07 11:53:12 CET 2017
 owner=
 code=GMLCatastro
 java-version=j1_7
 official=true
 type=Script
-version=1.0.0-9
+version=1.0.0-6
 state=testing
 operating-system=all
 dependencies=require\: org.gvsig.gdal.app.ogr.gml -ge 1.0.30-0
@@ -16,6 +16,6 @@ model-version=1.0.1
 categories=, Catastro, Import And Export
 description=
 owner-url=
-buildNumber=9
-gvSIG-version=2.4.1
+buildNumber=6
+gvSIG-version=2.3.1
 name=GMLCatastro

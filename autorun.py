@@ -1,13 +1,12 @@
 # encoding: utf-8
 
 import gvsig
-
 import addons.GMLCatastro.exporttogml
 reload(addons.GMLCatastro.exporttogml)
 
 from addons.GMLCatastro import exporttogml
 
-#import addons.GMLCatastro.exporttogml4
+import addons.GMLCatastro.exporttogml4 as addGMLExport4
 #reload(addons.GMLCatastro.exporttogml4)
 
 import addons.GMLCatastro.gmlcat
@@ -53,4 +52,5 @@ def main(*args):
     selfRegister()
     exporttogml.selfRegister()
     #addons.GMLCatastro.exporttogml4.exporttogml.ExporttoGML4ProviderLibrary()
+    addGMLExport4.exporttogml.ExporttoGML4ProviderLibrary()
     pass
