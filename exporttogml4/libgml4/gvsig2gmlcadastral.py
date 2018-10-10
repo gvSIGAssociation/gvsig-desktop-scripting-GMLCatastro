@@ -153,7 +153,7 @@ def plantilla(p_area, p_polygons, p_label, p_crs):
                      <base:localId>{p_label}</base:localId>
                      <base:namespace>ES.LOCAL.CP</base:namespace>
                  </base:Identifier>
-            </cp:InspireId>
+            </cp:inspireId>
             <cp:label>{p_label}</cp:label>
             <cp:nationalCadastralReference/>
             <cp:validFrom xsi:nil="true" nilReason="other:unpopulated"/>
