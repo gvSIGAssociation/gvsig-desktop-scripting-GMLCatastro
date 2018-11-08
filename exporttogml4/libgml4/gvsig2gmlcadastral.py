@@ -142,7 +142,7 @@ def plantilla(p_area, p_polygons, p_label, p_crs):
     <gml:featureMember>
         <cp:CadastralParcel gml:id="ES.LOCAL.CP.{p_label}">
             <cp:areaValue uom="m2">{p_area}</cp:areaValue>
-            <cp:beginLifespanVersion xsi:nil="true" nilReason="other:unpopulated">{p_datetime}</cp:beginLifespanVersion>
+            <cp:beginLifespanVersion xsi:nil="true" nilReason="other:unpopulated"></cp:beginLifespanVersion>
             <cp:geometry>
                 <gml:MultiSurface gml:id="MultiSurface_ES.LOCAL.CP.{p_label}" srsName="urn:ogc:def:crs:EPSG:{p_crs}"> 
                     {p_polygons}
