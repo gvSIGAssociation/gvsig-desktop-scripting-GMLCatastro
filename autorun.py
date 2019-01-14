@@ -1,10 +1,10 @@
 # encoding: utf-8
 
 import gvsig
-import addons.GMLCatastro.exporttogml
-reload(addons.GMLCatastro.exporttogml)
+#import addons.GMLCatastro.exporttogml
+#reload(addons.GMLCatastro.exporttogml)
 
-from addons.GMLCatastro import exporttogml
+#from addons.GMLCatastro import exporttogml
 
 import addons.GMLCatastro.exporttogml4 as addGMLExport4
 #reload(addons.GMLCatastro.exporttogml4)
@@ -22,6 +22,8 @@ import os
 
 from addons.GMLCatastro.gmlcat.gmlcat import GMLCatExtension
     
+from addons.GMLCatastro.exporttogml4.exportGMLLibrary import ExportGMLLibrary
+
 def selfRegister():
 
   application = ApplicationLocator.getManager()
@@ -50,7 +52,8 @@ def selfRegister():
   
 def main(*args):
     selfRegister()
-    exporttogml.selfRegister()
+    ExportGMLLibrary()
+    #exporttogml.selfRegister()
     #addons.GMLCatastro.exporttogml4.exporttogml.ExporttoGML4ProviderLibrary()
-    addGMLExport4.exporttogml.ExporttoGML4ProviderLibrary()
+    #addGMLExport4.exporttogml.ExporttoGML4ProviderLibrary()
     pass

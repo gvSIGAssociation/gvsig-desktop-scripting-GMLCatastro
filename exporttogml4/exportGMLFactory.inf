@@ -1,10 +1,9 @@
 [script]
 enable = true
-isolation = 0
 
 [Unit]
 type = Script
-name = exporttogml
+name = exportGMLFactory
 description = 
 createdBy = 
 version = 

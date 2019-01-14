@@ -1,0 +1,44 @@
+<GMLFeatureClassList>
+  <GMLFeatureClass>
+    <Name>CadastralParcel</Name>
+    <ElementPath>CadastralParcel</ElementPath>
+    <GeometryType>6</GeometryType>
+    <SRSName>urn:ogc:def:crs:EPSG:25830(+proj=utm +zone=30 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs )</SRSName>
+    <DatasetSpecificInfo>
+      <FeatureCount>1</FeatureCount>
+      <ExtentXMin>-2,31287</ExtentXMin>
+      <ExtentXMax>35,02994</ExtentXMax>
+      <ExtentYMin>48,20254</ExtentYMin>
+      <ExtentYMax>79,86538</ExtentYMax>
+    </DatasetSpecificInfo>
+    <PropertyDefn>
+      <Name>areaValue</Name>
+      <ElementPath>areaValue</ElementPath>
+      <Type>Integer</Type>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>areaValue_uom</Name>
+      <ElementPath>areaValue_uom</ElementPath>
+      <Type>String</Type>
+      <Width>2</Width>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>localId</Name>
+      <ElementPath>inspireId|Identifier|localId</ElementPath>
+      <Type>String</Type>
+      <Width>8</Width>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>namespace</Name>
+      <ElementPath>inspireId|Identifier|namespace</ElementPath>
+      <Type>String</Type>
+      <Width>11</Width>
+    </PropertyDefn>
+    <PropertyDefn>
+      <Name>label</Name>
+      <ElementPath>label</ElementPath>
+      <Type>String</Type>
+      <Width>8</Width>
+    </PropertyDefn>
+  </GMLFeatureClass>
+</GMLFeatureClassList>
