@@ -22,7 +22,8 @@ import os
 
 from addons.GMLCatastro.gmlcat.gmlcat import GMLCatExtension
     
-from addons.GMLCatastro.exporttogml4.exportGMLLibrary import ExportGMLLibrary
+from addons.GMLCatastro.exporttogml4.exportGMLLibrary import ExportGMLLibrary as ExportGML4Library
+from addons.GMLCatastro.exporttogml.exportGMLLibrary import ExportGMLLibrary as ExportGML3Library
 
 def selfRegister():
 
@@ -52,7 +53,8 @@ def selfRegister():
   
 def main(*args):
     selfRegister()
-    ExportGMLLibrary()
+    ExportGML4Library()
+    ExportGML3Library()
     #exporttogml.selfRegister()
     #addons.GMLCatastro.exporttogml4.exporttogml.ExporttoGML4ProviderLibrary()
     #addGMLExport4.exporttogml.ExporttoGML4ProviderLibrary()
