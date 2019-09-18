@@ -7,6 +7,7 @@ from org.gvsig.export.spi import AbstractExportParametersGeometry
 class ExportGMLParameters(AbstractExportParametersGeometry,HasAFile):
   def __init__(self, factory):
     AbstractExportParametersGeometry.__init__(self, factory)
+    self.factoryName = factory.getName()
     self.useUniqueName = True #boolean
     self.folderFile  = None #file
   def needsSelectTargetProjection(self):
