@@ -5,7 +5,8 @@ from org.gvsig.tools.util import HasAFile
 from org.gvsig.export.spi import AbstractExportParametersGeometry
 
 class ExportGMLParameters(AbstractExportParametersGeometry,HasAFile):
-  def __init__(self):
+  def __init__(self, factory):
+    AbstractExportParametersGeometry.__init__(self, factory)
     self.useUniqueName = True #boolean
     self.folderFile  = None #file
   def needsSelectTargetProjection(self):
@@ -20,7 +21,8 @@ class ExportGMLParameters(AbstractExportParametersGeometry,HasAFile):
     return self.useUniqueName
   def setUseUniqueName(self, uniqueName):
     self.useUniqueName = uniqueName
- 
+  def getServiceName(self):
+    return self.factoryName
 def main(*args):
 
     #Remove this lines and add here your code
