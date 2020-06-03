@@ -12,8 +12,6 @@ class ExportGMLParameters(AbstractExportParametersGeometry,HasAFile):
     self.folderFile  = None #file
   def needsSelectTargetProjection(self):
     return True # para que saque el panel de proyeccion
-  def getServiceName(self):
-    pass
   def getFile(self):
     return self.folderFile
   def setFile(self, folderFile):
@@ -24,6 +22,7 @@ class ExportGMLParameters(AbstractExportParametersGeometry,HasAFile):
     self.useUniqueName = uniqueName
   def getServiceName(self):
     return self.factoryName
+    
 def main(*args):
 
     #Remove this lines and add here your code

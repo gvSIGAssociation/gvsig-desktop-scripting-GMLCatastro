@@ -32,6 +32,10 @@ class ExportGMLService(ExportService):
     
   def getTaskStatus(self):
     return self._taskStatus
+
+  def setTaskStatus(self, taskStatus):
+    self._taskStatus = taskStatus
+    
   def isCancellationRequested(self):
     return self._requestCancel
     
